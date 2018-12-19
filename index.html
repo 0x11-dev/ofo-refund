@@ -37,7 +37,7 @@
           yAxis: {},
           series: [
             {
-              name: '日',
+              name: '日退款用户数',
               type: 'line',
               areaStyle: {
                 color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
@@ -54,14 +54,13 @@
               data: data
                 .map(item => Number.parseInt(item[1]))
                 .map(
-                  (item, idx, all) => all[idx === 0 ? 0 : idx - 1]-all[idx] 
+                  (item, idx, all) => all[idx === 0 ? 0 : idx - 1]-all[idx]
                 )
                 .slice(1)
             }
           ]
         };
 
-        // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
       }
       init();
