@@ -17,12 +17,14 @@
     <div id="main" style="width: 100vw; height:100vh;"></div>
     <script type="text/javascript">
       async function init() {
-        let data = (await (await await fetch('/ofo.txt')).text())
+        let data = (await (await fetch('/ofo.txt')).text())
           .trim()
           .split('\n')
           .map(item => item.split(' '));
 
         var myChart = echarts.init(document.getElementById('main'));
+
+
         var option = {
           title: {
             text: 'ofo退款速度'
@@ -32,9 +34,11 @@
             data: ['日退款用户数']
           },
           xAxis: {
+            type: 'category',
+            boundaryGap: false,
             data: data.map(item => item[0]).slice(0, -1)
           },
-          yAxis: {},
+          yAxis: {type: 'value'},
           series: [
             {
               name: '日退款用户数',
@@ -54,14 +58,14 @@
               data: data
                 .map(item => Number.parseInt(item[1]))
                 .map(
-                  (item, idx, all) => all[idx === 0 ? 0 : idx - 1]-all[idx]
+                  (item, idx, all) => all[idx === 0 ? 0 : (idx-1)]-all[idx]
                 )
                 .slice(1)
             }
           ]
         };
 
-        myChart.setOption(option);
+        myChart.setOption(option, true);
       }
       init();
     </script>
