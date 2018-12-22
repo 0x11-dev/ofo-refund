@@ -17,7 +17,7 @@
     <div id="main" style="width: 100vw; height:100vh;"></div>
     <script type="text/javascript">
       async function init() {
-        let data = (await (await fetch('/ofo.txt')).text())
+        let data = (await (await fetch('/ofo.txt' + Math.random())).text())
           .trim()
           .split('\n')
           .map(item => item.split(' '));
